@@ -10,6 +10,8 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css'
 import { useState } from 'react'
 import './App.css'
 
+const API_KEY = 'sk-proj-6Mn8Hw5eH4FG30gUpIhUT3BlbkFJxcVJ4AYNRpvCRZS09785'
+
 function App() {
   const [typing, setTyping] = useState(false)
   const [messages, setMessages] = useState([
