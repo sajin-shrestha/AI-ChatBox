@@ -36,18 +36,21 @@ function App() {
     setTyping(true)
 
     // Simulate an AI response
-    setTimeout(() => {
-      const aiResponse = {
-        message: 'This is a response from AI.',
-        sender: 'Chatgpt',
-        direction: 'incoming', // AI response is incoming
-      }
-      setMessages((prevMessages) => [...prevMessages, aiResponse])
-      setTyping(false)
-    }, 1000)
+    // setTimeout(() => {
+    //   const aiResponse = {
+    //     message: 'This is a response from AI.',
+    //     sender: 'Chatgpt',
+    //     direction: 'incoming', // AI response is incoming
+    //   }
+    //   setMessages((prevMessages) => [...prevMessages, aiResponse])
+    //   setTyping(false)
+    // }, 1000)
 
     //process message to chatgpt (send it over and see the response)
+    await processMessageToChatGPT(newMessages)
   }
+
+  async function processMessageToChatGPT(chatMessages) {}
 
   return (
     <>
