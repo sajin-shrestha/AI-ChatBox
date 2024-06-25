@@ -52,7 +52,49 @@ function App() {
     await processMessageToChatGPT(newMessages)
   }
 
-  async function processMessageToChatGPT(chatMessages) {}
+  async function processMessageToChatGPT(chatMessages) {
+    // chatMessages {sender:"user" or "chatgpt", message:"the message content here"}
+    // apiMessage {role:"user" or "assistant", content:"the message content here"}
+
+    let apiMessages = chatMessages.map((messageObject) => {
+      let role = ''
+      if (messageObject.sender === 'ChatGPT') {
+        role = 'assistant'
+      } else {
+        role = 'user'
+      }
+      return { role: role, content: messageObject.message }
+    })
+
+    const systemMessage = {
+      role: 'System',
+      content: 'Explain all concepts like a expert.',
+    }
+
+    const apiRequestBody = {
+      // "model": "gpt-3.5-turbo",
+      model: 'gpt-4',
+      messages: [
+        systemMessage,
+        ...apiMessages, // array of messages
+      ],
+    }
+
+    await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer' + API_KEY,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(apiRequestBody),
+    })
+      .then((data) => {
+        return data.json()
+      })
+      .then((data) => {
+        console.log(data)
+      })
+  }
 
   return (
     <>
